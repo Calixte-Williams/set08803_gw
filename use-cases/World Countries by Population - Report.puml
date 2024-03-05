@@ -1,16 +1,16 @@
 @startuml
 
-actor WHO as "Employee"
+actor User as "Employee"
 
-rectangle Database
+rectangle DB as "World Database"
 
 rectangle "World Country Report" {
-    usecase UC4 as "Get Countries by Population"
+    usecase UC1 as "Get Countries by Population"
 
     usecase UCa as "PRINT Countries"
 
-    WHO - UC4
-    UC4 ..> UCa : include
-    UC4 - Database
+    User - UC1
+    UC1 ..> UCa : include
+    UC1 - DB
 }
 @enduml
