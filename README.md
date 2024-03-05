@@ -11,3 +11,10 @@
 - Terrel Deligny
 - Jermon Ephraim
 - Shahidi Leonce
+
+## Kanban Board
+Kanban #1: GitHub Projects
+- https://github.com/users/Calixte-Williams/projects/2
+
+Kanban #2: Zube.io
+- https://zube.io/napier-343/population-reporting-set08803/w/workspace-1/kanban
