@@ -1,6 +1,8 @@
 Code of  Conduct
 
-	As software developers; it is important to create and adhere to a Code of Conduct especially when working in a team. A code of conduct is a set of guidelines that specify how a person is expected to behave while associated with an organization. Below specifies the Code of Conduct guidelines for our group while we work together to complete our project.
+As software developers; it is important to create and adhere to a Code of Conduct especially when working in a team. A code of conduct is a set of guidelines that specify how a person is expected to behave while associated with an organization. Below specifies the Code of Conduct guidelines for our group while we work together to complete our project.
+
+
 
 
 Code of Conduct guidelines: Self
