@@ -1,4 +1,4 @@
-# SET08803 Coursework Group
+# SET08803 Coursework Group 1
 
 * Master Build Status ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Calixte-Williams/set08803_gw/main.yml?branch=master)
 * Develop Branch Status ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Calixte-Williams/set08803_gw/main.yml?branch=develop)
