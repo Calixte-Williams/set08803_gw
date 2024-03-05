@@ -12,11 +12,17 @@ public class App
         // Connect to database
         a.connect();
 
+        //Get Countries
+        Country country = a.getCountriesByPopulation();
+        a.getCountriesByPopulation();
+
+        //Display World Country Report sorted by Population
+        // a.displayCountries(country);
+
         // Disconnect from database
         a.disconnect();
 
-        //Display World Country Report sorted by Population
-        a.displayCountries(country);
+
     }
 
     /**
@@ -39,7 +45,6 @@ public class App
             }
 
             // Connection to the database
-            Connection con = null;
             int retries = 100;
             for (int i = 0; i < retries; ++i) {
                 System.out.println("Connecting to database...");
@@ -62,7 +67,7 @@ public class App
             }
         }
 
-       public Country getCountriesByPopulation() throws Exception{
+       public Country getCountriesByPopulation(){
            try
            {
                // Create an SQL statement
@@ -74,7 +79,6 @@ public class App
                                + "ORDER BY Population desc";
                // Execute SQL statement
                ResultSet rset = stmt.executeQuery(strSelect);
-               // Return new employee if valid.
                // Check one is returned
                if (rset.next())
                {
@@ -83,6 +87,7 @@ public class App
                    country.country_name = rset.getString("country.name");
                    country.continent = rset.getString("country.continent");
                    country.population = rset.getInt("country.population");
+                   System.out.println(country.country_code + ", " + country.country_name + ", " + country.continent + ", " + country.population);
                    return country;
                }
                else
@@ -95,11 +100,11 @@ public class App
                return null;
            }
 
-           public void displayCountries(Country country){
+           /* public void displayCountries(Country country){
                if (country != null) {
                    System.out.println(country.country_code + ", " + country.country_name + ", " + country.continent + ", " + country.population);
                }
-               }
+               } */
 
        }
 
@@ -114,7 +119,10 @@ public class App
             try
             {
                 // Close connection
+                System.out.println("Closing World Database connection...");
                 con.close();
+                System.out.println("Connection closed.");
+
             }
             catch (Exception e)
             {
