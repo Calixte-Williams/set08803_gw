@@ -1,0 +1,16 @@
+@startuml
+
+actor WHO as "Employee"
+
+rectangle Database
+
+rectangle "World Country Report" {
+    usecase UC4 as "Get Countries by Population"
+
+    usecase UCa as "PRINT Countries"
+
+    WHO - UC4
+    UC4 ..> UCa : include
+    UC4 - Database
+}
+@enduml
