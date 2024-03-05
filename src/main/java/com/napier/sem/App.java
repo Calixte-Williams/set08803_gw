@@ -14,6 +14,9 @@ public class App
 
         // Disconnect from database
         a.disconnect();
+
+        //Display World Country Report sorted by Population
+        a.displayCountries(country);
     }
 
     /**
@@ -59,7 +62,47 @@ public class App
             }
         }
 
-       //public Country getCountriesByPopulation(){}
+       public Country getCountriesByPopulation() throws Exception{
+           try
+           {
+               // Create an SQL statement
+               Statement stmt = con.createStatement();
+               // Create string for SQL statement
+               String strSelect =
+                       "SELECT country.Code, country.Name, country.Continent, country.Population "
+                               + "FROM world.country "
+                               + "ORDER BY Population desc";
+               // Execute SQL statement
+               ResultSet rset = stmt.executeQuery(strSelect);
+               // Return new employee if valid.
+               // Check one is returned
+               if (rset.next())
+               {
+                   Country country = new Country();
+                   country.country_code = rset.getString("country.code");
+                   country.country_name = rset.getString("country.name");
+                   country.continent = rset.getString("country.continent");
+                   country.population = rset.getInt("country.population");
+                   return country;
+               }
+               else
+                   return null;
+           }
+           catch (Exception e)
+           {
+               System.out.println(e.getMessage());
+               System.out.println("Failed to get Country information");
+               return null;
+           }
+
+           public void displayCountries(Country country){
+               if (country != null) {
+                   System.out.println(country.country_code + ", " + country.country_name + ", " + country.continent + ", " + country.population);
+               }
+               }
+
+       }
+
 
     /**
      * Disconnect from the MySQL database.
