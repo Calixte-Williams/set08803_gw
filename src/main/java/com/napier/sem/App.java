@@ -67,6 +67,7 @@ public class App
             }
         }
 
+        //Method to display countries sorted by population
        public Country getCountriesByPopulation(){
            try
            {
