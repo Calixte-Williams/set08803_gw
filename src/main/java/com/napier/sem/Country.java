@@ -16,4 +16,11 @@ public class Country {
     /* Population */
 
     public Integer population;
+
+    /* Region */
+
+    public String region;
+
+    /* Capital */
+    public String country_capital;
 }
