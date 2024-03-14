@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -12,9 +13,13 @@ public class App
         // Connect to database
         a.connect();
 
-        //Get Countries
-        Country country = a.getCountriesByPopulation();
+        // Get Countries in Continent By Population
         a.getCountriesByPopulation();
+
+
+        //Get Countries
+        //Country country = a.getCountriesByPopulation();
+        //a.getCountriesByPopulation();
 
         //Display World Country Report sorted by Population
         // a.displayCountries(country);
@@ -108,6 +113,53 @@ public class App
                } */
 
        }
+
+
+
+    public ArrayList<Country> getCountriesInContByPop() {
+        ArrayList<Country> countryList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT code, name, continent, region, population, capital "
+                            + "FROM country "
+                            + "WHERE continent = 'Europe' "
+                            + "ORDER BY population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Country country = new Country();
+                country.country_code = rset.getString("code");
+                country.country_name = rset.getString("name");
+                country.continent = rset.getString("continent");
+                country.region = rset.getString("region");
+                country.population = rset.getInt("population");
+                country.country_capital = rset.getString("capital");
+                countryList.add(country);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Print each country's details
+        for (Country country : countryList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s %-15s %-15s",
+                            country.country_code, country.country_name, country.continent, country.region, country.population, country.country_capital);
+            System.out.println(country_string);
+        }
+        return countryList;
+    }
+
+
 
 
     /**
