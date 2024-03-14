@@ -14,7 +14,7 @@ public class App
         a.connect();
 
         // Get Countries in Continent By Population
-        a.getCountriesByPopulation();
+        a.getCountriesInContByPop();
 
 
         //Get Countries
