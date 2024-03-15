@@ -123,9 +123,10 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT code, name, continent, region, population, capital "
+                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
-                            + "WHERE continent = 'Europe' "
+                            + "JOIN city ON country.capital = city.ID "
+                            + "WHERE country.continent = 'Europe' "
                             + "ORDER BY population DESC";
 
             // Execute SQL statement
@@ -133,12 +134,12 @@ public class App
             // Process the result set and add to the list
             while (rset.next()) {
                 Country country = new Country();
-                country.country_code = rset.getString("code");
-                country.country_name = rset.getString("name");
-                country.continent = rset.getString("continent");
-                country.region = rset.getString("region");
-                country.population = rset.getInt("population");
-                country.country_capital = rset.getString("capital");
+                country.country_code = rset.getString("country.code");
+                country.country_name = rset.getString("country.name");
+                country.continent = rset.getString("country.continent");
+                country.region = rset.getString("country.region");
+                country.population = rset.getInt("country.population");
+                country.country_capital = rset.getString("capital_city");
                 countryList.add(country);
             }
         } catch (Exception e) {
