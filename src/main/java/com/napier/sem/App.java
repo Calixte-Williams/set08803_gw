@@ -12,10 +12,10 @@ public class App
 
         // Connect to database
         a.connect();
-      
+
         // Method to get top N populated countries in the world
         a.getTopNCountriesInWorldByPop(5);
-      
+
         // Get Countries in Continent By Population
         a.getCountriesInContByPop("Europe");
 
