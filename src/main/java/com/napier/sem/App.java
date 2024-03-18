@@ -14,7 +14,7 @@ public class App
         a.connect();
 
         // Get Countries in Continent By Population
-        a.getCountriesInContByPop();
+        a.getCountriesInContByPop("Europe");
 
 
         //Get Countries
@@ -116,7 +116,7 @@ public class App
 
 
 
-    public ArrayList<Country> getCountriesInContByPop() {
+    public ArrayList<Country> getCountriesInContByPop(String Continent) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
             // Create an SQL statement
@@ -126,7 +126,7 @@ public class App
                     "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.continent = 'Europe' "
+                            + "WHERE country.continent = '"+Continent+"'"
                             + "ORDER BY population DESC";
 
             // Execute SQL statement
