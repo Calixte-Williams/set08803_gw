@@ -18,11 +18,11 @@ public class App
         //a.getCountriesByPopulation();
 
         // Method to get top N populated countries in the world
-        a.getTopNCountriesInWorldByPop(5);
+        //a.getTopNCountriesInWorldByPop(5);
 
         //Method to get top N populated countries in a continent
 
-        //a.getTopNCountriesInContinentByPop(5);
+        a.getTopNCountriesInContinentByPop(5, "Asia");
 
 
         //Display World Country Report sorted by Population
@@ -165,7 +165,7 @@ public class App
 
 
         //Method to display the top N populated countries in
-        public ArrayList<Country> getTopNCountriesInContinentByPop(Integer number) {
+        public ArrayList<Country> getTopNCountriesInContinentByPop(int number, String Continent) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
             // Create an SQL statement
@@ -174,12 +174,13 @@ public class App
 
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
+                    "SELECT country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "ORDER BY population DESC"
-                            + "WHERE country.continent = 'Africa' "
-                            + "LIMIT "+number+" ";
+                            + "WHERE country.continent = '"+Continent+"'"
+                            + "ORDER BY population DESC "
+                            + "LIMIT " + number;
+
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
