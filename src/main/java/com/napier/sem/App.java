@@ -14,7 +14,7 @@ public class App
         a.connect();
 
         //Get All The Countries In a Region Organized by Largest Population to Smallest
-        a.getCountriesInRegionByPop();
+        a.getCountriesInRegionByPop("Caribbean");
 
         //Get Countries
         //Country country = a.getCountriesByPopulation();
@@ -73,7 +73,7 @@ public class App
 
 
         //Method to display all the countries in a region organized by largest population to smallest
-        public ArrayList<Country> getCountriesInRegionByPop() {
+        public ArrayList<Country> getCountriesInRegionByPop(String Region) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
             // Create an SQL statement
@@ -83,7 +83,7 @@ public class App
                     "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.region = 'Caribbean' "
+                            + "WHERE country.region = '"+Region+"'"
                             + "ORDER BY population DESC";
 
             // Execute SQL statement
