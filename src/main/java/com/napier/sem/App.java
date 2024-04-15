@@ -7,7 +7,7 @@ public class App
 {
     public static void main(String[] args)
     {
-        // Create new Application
+        //Create new Application
         App a = new App();
 
         // Connect to database
@@ -16,14 +16,17 @@ public class App
         // Method to get top N populated countries in the world
         a.getTopNCountriesInWorldByPop(5);
 
+        //Method to get top N populated countries in a continent
+        a.getTopNCountriesInContinentByPop(5, "Asia");
+
 
         //Method to get top N populated countries in a region
         a.getTopNCountriesInRegionByPop(10, "Caribbean");
-        //Method to get top N populated countries in a continent
 
-        a.getTopNCountriesInContinentByPop(5, "Asia");
+        //Method to display countries by population in continent
+        a.getCountriesInContByPop("Asia");
 
-        //Get All The Countries In a Region Organized by Largest Population to Smallest
+        //Method to display countries by population in region
         a.getCountriesInRegionByPop("Caribbean");
 
         // Disconnect from database
@@ -74,7 +77,6 @@ public class App
             }
         }
 
-
         //Method to display the top N populated countries in the world
         public ArrayList<Country> getTopNCountriesInWorldByPop(Integer number) {
         ArrayList<Country> countryList = new ArrayList<>();
@@ -88,105 +90,6 @@ public class App
                             + "JOIN city ON country.capital = city.ID "
                             + "ORDER BY population DESC"
                             + " LIMIT "+number+" ";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Process the result set and add to the list
-            while (rset.next()) {
-                Country country = new Country();
-                country.country_code = rset.getString("country.code");
-                country.country_name = rset.getString("country.name");
-                country.continent = rset.getString("country.continent");
-                country.region = rset.getString("country.region");
-                country.population = rset.getInt("country.population");
-                country.country_capital = rset.getString("capital_city");
-                countryList.add(country);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
-
-        // Print header
-        System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-        // Print each country's details
-        for (Country country : countryList) {
-            String country_string =
-                    String.format("%-15s %-30s %-15s %-30s %-15s %-15s",
-                            country.country_code, country.country_name, country.continent, country.region, country.population, country.country_capital);
-            System.out.println(country_string);
-        }
-        return countryList;
-    }
-
-
-
-
-    //Method to display all the countries in a region organized by largest population to smallest
-    public ArrayList<Country> getCountriesInRegionByPop(String Region) {
-        ArrayList<Country> countryList = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
-                            + "FROM country "
-                            + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.region = '"+Region+"'"
-                            + "ORDER BY population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Process the result set and add to the list
-            while (rset.next()) {
-                Country country = new Country();
-                country.country_code = rset.getString("country.code");
-                country.country_name = rset.getString("country.name");
-                country.continent = rset.getString("country.continent");
-                country.region = rset.getString("country.region");
-                country.population = rset.getInt("country.population");
-                country.country_capital = rset.getString("capital_city");
-                countryList.add(country);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
-
-        // Print header
-        System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-        // Print each country's details
-        for (Country country : countryList) {
-            String country_string =
-                    String.format("%-15s %-30s %-15s %-30s %-15s %-15s",
-                            country.country_code, country.country_name, country.continent, country.region, country.population, country.country_capital);
-            System.out.println(country_string);
-        }
-        return countryList;
-    }
-
-
-        //Method to display the top N populated countries in
-        public ArrayList<Country> getTopNCountriesInContinentByPop(int number, String Continent) {
-        ArrayList<Country> countryList = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-
-
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
-                            + "FROM country "
-                            + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.continent = '"+Continent+"'"
-                            + "ORDER BY population DESC "
-                            + "LIMIT " + number;
-
-
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -238,6 +141,147 @@ public class App
                             + "ORDER BY population DESC "
                             + "LIMIT " + number;
 
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Country country = new Country();
+                country.country_code = rset.getString("country.code");
+                country.country_name = rset.getString("country.name");
+                country.continent = rset.getString("country.continent");
+                country.region = rset.getString("country.region");
+                country.population = rset.getInt("country.population");
+                country.country_capital = rset.getString("capital_city");
+                countryList.add(country);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Print each country's details
+        for (Country country : countryList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s %-15s %-15s",
+                            country.country_code, country.country_name, country.continent, country.region, country.population, country.country_capital);
+            System.out.println(country_string);
+        }
+        return countryList;
+    }
+
+
+    //Method to display the top N populated countries in continent
+    public ArrayList<Country> getTopNCountriesInContinentByPop(int number, String Continent) {
+        ArrayList<Country> countryList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
+                            + "FROM country "
+                            + "JOIN city ON country.capital = city.ID "
+                            + "WHERE country.continent = '"+Continent+"'"
+                            + "ORDER BY population DESC "
+                            + "LIMIT " + number;
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Country country = new Country();
+                country.country_code = rset.getString("country.code");
+                country.country_name = rset.getString("country.name");
+                country.continent = rset.getString("country.continent");
+                country.region = rset.getString("country.region");
+                country.population = rset.getInt("country.population");
+                country.country_capital = rset.getString("capital_city");
+                countryList.add(country);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Print each country's details
+        for (Country country : countryList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s %-15s %-15s",
+                            country.country_code, country.country_name, country.continent, country.region, country.population, country.country_capital);
+            System.out.println(country_string);
+        }
+        return countryList;
+    }
+
+    //Method to display countries in continent by population
+    public ArrayList<Country> getCountriesInContByPop(String Continent) {
+        ArrayList<Country> countryList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
+                            + "FROM country "
+                            + "JOIN city ON country.capital = city.ID "
+                            + "WHERE country.continent = '"+Continent+"'"
+                            + "ORDER BY population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Country country = new Country();
+                country.country_code = rset.getString("country.code");
+                country.country_name = rset.getString("country.name");
+                country.continent = rset.getString("country.continent");
+                country.region = rset.getString("country.region");
+                country.population = rset.getInt("country.population");
+                country.country_capital = rset.getString("capital_city");
+                countryList.add(country);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Print each country's details
+        for (Country country : countryList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s %-15s %-15s",
+                            country.country_code, country.country_name, country.continent, country.region, country.population, country.country_capital);
+            System.out.println(country_string);
+        }
+        return countryList;
+    }
+
+
+    //Method to display all the countries in a region organized by largest population to smallest
+    public ArrayList<Country> getCountriesInRegionByPop(String Region) {
+        ArrayList<Country> countryList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
+                            + "FROM country "
+                            + "JOIN city ON country.capital = city.ID "
+                            + "WHERE country.region = '"+Region+"'"
+                            + "ORDER BY population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
