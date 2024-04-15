@@ -24,11 +24,3 @@ public class Country {
     /* Capital */
     public String country_capital;
 }
-
-    /* Region */
-
-    public String region;
-
-    /* Capital */
-    public String country_capital;
-}
