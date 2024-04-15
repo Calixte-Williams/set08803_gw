@@ -12,24 +12,27 @@ public class App {
         a.connect();
 
         //Method to get countries by population
-        a.getCountriesByPopulation();
+        //a.getCountriesByPopulation();
 
         // Method to get top N populated countries in the world
-        a.getTopNCountriesInWorldByPop(5);
+        //a.getTopNCountriesInWorldByPop(5);
 
         //Method to get top N populated countries in a continent
-        a.getTopNCountriesInContinentByPop(5, "Asia");
+        //a.getTopNCountriesInContinentByPop(5, "Asia");
 
 
         //Method to get top N populated countries in a region
-        a.getTopNCountriesInRegionByPop(10, "Caribbean");
+        //a.getTopNCountriesInRegionByPop(10, "Caribbean");
 
         //Method to display countries by population in continent
-        a.getCountriesInContByPop("Asia");
+        //a.getCountriesInContByPop("Asia");
 
         //Method to display countries by population in region
-        a.getCountriesInRegionByPop("Caribbean");
-        
+        //a.getCountriesInRegionByPop("Caribbean");
+
+        //Method to display cities in the world by population
+        a.getCitiesByPop();
+
 
         // Disconnect from database
         a.disconnect();
@@ -78,6 +81,25 @@ public class App {
         }
     }
 
+    /**
+     * Disconnection from MySQL database.
+     */
+    public void disconnect() {
+        if (con != null) {
+            try {
+                // Close connection
+                System.out.println("Closing World Database connection...");
+                con.close();
+                System.out.println("Connection closed.");
+
+            } catch (Exception e) {
+                System.out.println("Error closing connection to database");
+            }
+        }
+    }
+
+
+
     //Method to display countries sorted by population
     public ArrayList<Country> getCountriesByPopulation() {
         ArrayList<Country> countryList = new ArrayList<>();
@@ -123,9 +145,8 @@ public class App {
     }
 
 
-
     //Method to display the top N populated countries in the world
-        public ArrayList<Country> getTopNCountriesInWorldByPop(Integer number) {
+    public ArrayList<Country> getTopNCountriesInWorldByPop(Integer number) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
             // Create an SQL statement
@@ -136,7 +157,7 @@ public class App {
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
                             + "ORDER BY population DESC"
-                            + " LIMIT "+number+" ";
+                            + " LIMIT " + number + " ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -182,7 +203,7 @@ public class App {
                     "SELECT country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.region = '"+Region+"'"
+                            + "WHERE country.region = '" + Region + "'"
                             + "ORDER BY population DESC "
                             + "LIMIT " + number;
 
@@ -232,7 +253,7 @@ public class App {
                     "SELECT country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.continent = '"+Continent+"'"
+                            + "WHERE country.continent = '" + Continent + "'"
                             + "ORDER BY population DESC "
                             + "LIMIT " + number;
 
@@ -279,7 +300,7 @@ public class App {
                     "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.continent = '"+Continent+"'"
+                            + "WHERE country.continent = '" + Continent + "'"
                             + "ORDER BY population DESC";
 
             // Execute SQL statement
@@ -325,7 +346,7 @@ public class App {
                     "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
                             + "FROM country "
                             + "JOIN city ON country.capital = city.ID "
-                            + "WHERE country.region = '"+Region+"'"
+                            + "WHERE country.region = '" + Region + "'"
                             + "ORDER BY population DESC";
 
             // Execute SQL statement
@@ -359,28 +380,49 @@ public class App {
         return countryList;
     }
 
+    //Method to display cities in world by population
+    public ArrayList<City> getCitiesByPop() {
+        ArrayList<City> cityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
 
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city , world.country "
+                            + "where country.Code = city.CountryCode "
+                            + "ORDER BY Population desc;";
 
-
-    /**
-     * Disconnect from the MySQL database.
-     */
-    public void disconnect()
-    {
-        if (con != null)
-        {
-            try
-            {
-                // Close connection
-                System.out.println("Closing World Database connection...");
-                con.close();
-                System.out.println("Connection closed.");
-
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("city.name");
+                city.country_name = rset.getString("country.name");
+                city.district = rset.getString("city.district");
+                city.population = rset.getInt("city.population");
+                cityList.add(city);
             }
-            catch (Exception e)
-            {
-                System.out.println("Error closing connection to database");
-            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
         }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
+        // Print each country's details
+        for (City city : cityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s",
+                            city.name, city.country_name, city.district, city.population);
+            System.out.println(country_string);
+        }
+        return cityList;
+
+
     }
 }
+
