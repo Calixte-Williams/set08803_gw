@@ -12,32 +12,35 @@ public class App {
         a.connect();
 
         //Method to get countries by population
-        a.getCountriesByPopulation();
+        //a.getCountriesByPopulation();
 
         // Method to get top N populated countries in the world
-        a.getTopNCountriesInWorldByPop(5);
+        //a.getTopNCountriesInWorldByPop(5);
 
         //Method to get top N populated countries in a continent
-        a.getTopNCountriesInContinentByPop(5, "Asia");
+        //a.getTopNCountriesInContinentByPop(5, "Asia");
 
 
         //Method to get top N populated countries in a region
-        a.getTopNCountriesInRegionByPop(10, "Caribbean");
+        //a.getTopNCountriesInRegionByPop(10, "Caribbean");
 
         //Method to display countries by population in continent
-        a.getCountriesInContByPop("Asia");
+        //a.getCountriesInContByPop("Asia");
 
         //Method to display countries by population in region
-        a.getCountriesInRegionByPop("Caribbean");
+        //a.getCountriesInRegionByPop("Caribbean");
 
         //Method to display cities in the world by population
-        a.getCitiesByPop();
+        //a.getCitiesByPop();
 
         //Method to display cities in the world by population in a continent
-        a.getCitiesByPopinAContinent("Europe");
+        //a.getCitiesByPopinAContinent("Europe");
 
         //Method to display cities in the world by population in a region
-        a.getCitiesbyPopinARegion("Caribbean");
+        //a.getCitiesbyPopinARegion("Caribbean");
+
+        //Method to display in the world by population in a country
+        a.getCitiesbyPopinACountry("Barbados");
 
         // Disconnect from database
         a.disconnect();
@@ -102,7 +105,6 @@ public class App {
             }
         }
     }
-
 
 
     //Method to display countries sorted by population
@@ -430,6 +432,7 @@ public class App {
 
     }
 
+    //Method to display cities in world by population in a continent
     public ArrayList<City> getCitiesByPopinAContinent(String continent) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
@@ -476,6 +479,7 @@ public class App {
 
     }
 
+    //Method to display cities in world by population in a region
     public ArrayList<City> getCitiesbyPopinARegion(String Region) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
@@ -520,7 +524,52 @@ public class App {
         return cityList;
 
 
-         }
     }
 
+    //Method to display cities in world by population in a country
+    public ArrayList<City> getCitiesbyPopinACountry(String Country) {
+        ArrayList<City> cityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city "
+                            + "JOIN world.country on city.CountryCode = country.Code "
+                            + "WHERE country.name = '" + Country + "'"
+                            + "ORDER BY Population desc";
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("city.name");
+                city.country_name = rset.getString("country.name");
+                city.district = rset.getString("city.district");
+                city.population = rset.getInt("city.population");
+                cityList.add(city);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
+        // Print each country's details
+        for (City city : cityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s",
+                            city.name, city.country_name, city.district, city.population);
+            System.out.println(country_string);
+        }
+        return cityList;
+
+    }
+}
 
