@@ -31,7 +31,10 @@ public class App {
         //a.getCountriesInRegionByPop("Caribbean");
 
         //Method to display cities in the world by population
-        a.getCitiesByPop();
+        //a.getCitiesByPop();
+
+        //Method to display cities in the world by population in a continent
+        a.getCitiesByPopinAContinent("Europe");
 
 
         // Disconnect from database
@@ -392,6 +395,51 @@ public class App {
                     "SELECT city.Name, country.Name, city.District, city.Population "
                             + "FROM world.city , world.country "
                             + "where country.Code = city.CountryCode "
+                            + "ORDER BY Population desc;";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("city.name");
+                city.country_name = rset.getString("country.name");
+                city.district = rset.getString("city.district");
+                city.population = rset.getInt("city.population");
+                cityList.add(city);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
+        // Print each country's details
+        for (City city : cityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s",
+                            city.name, city.country_name, city.district, city.population);
+            System.out.println(country_string);
+        }
+        return cityList;
+
+
+    }
+
+    public ArrayList<City> getCitiesByPopinAContinent(String continent) {
+        ArrayList<City> cityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city , world.country "
+                            + "where country.Code = city.CountryCode "
+                            + "where country.continent = '" + continent +"'"
                             + "ORDER BY Population desc;";
 
             // Execute SQL statement
