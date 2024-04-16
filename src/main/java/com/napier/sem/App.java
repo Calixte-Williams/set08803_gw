@@ -12,35 +12,35 @@ public class App {
         a.connect();
 
         //Method to get countries by population
-        //a.getCountriesByPopulation();
+        a.getCountriesByPopulation();
 
         // Method to get top N populated countries in the world
-        //a.getTopNCountriesInWorldByPop(5);
+        a.getTopNCountriesInWorldByPop(5);
 
         //Method to get top N populated countries in a continent
-        //a.getTopNCountriesInContinentByPop(5, "Asia");
+        a.getTopNCountriesInContinentByPop(5, "Asia");
 
 
         //Method to get top N populated countries in a region
-        //a.getTopNCountriesInRegionByPop(10, "Caribbean");
+        a.getTopNCountriesInRegionByPop(10, "Caribbean");
 
         //Method to display countries by population in continent
-        //a.getCountriesInContByPop("Asia");
+        a.getCountriesInContByPop("Asia");
 
         //Method to display countries by population in region
-        //a.getCountriesInRegionByPop("Caribbean");
+        a.getCountriesInRegionByPop("Caribbean");
 
         //Method to display cities in the world by population
-        //a.getCitiesByPop();
+        a.getCitiesByPop();
 
         //Method to display cities in the world by population in a continent
-        //a.getCitiesByPopinAContinent("Europe");
+        a.getCitiesByPopinAContinent("Europe");
 
         //Method to display cities in the world by population in a region
-        //a.getCitiesbyPopinARegion("Caribbean");
+        a.getCitiesbyPopinARegion("Caribbean");
 
         //Method to display cities in the world by population in a country
-        //a.getCitiesbyPopinACountry("Barbados");
+        a.getCitiesbyPopinACountry("Barbados");
 
         //Method to display cities in the world by population in a district
         a.getCitiesbyPopinADistrict("Castries");
