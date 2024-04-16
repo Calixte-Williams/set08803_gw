@@ -60,7 +60,8 @@ public class App {
         //Method to display top N cities in a district by population
         a.getTopNCitiesbyPopinDistrict(3,"Castries");
 
-
+        //Method to display top capital cities in the world by population
+        a.getCapitalCities();
 
 
         // Disconnect from database
@@ -776,6 +777,7 @@ public class App {
 
     }
 
+    //Method to display top N cities in a country by population
     public ArrayList<City> getTopNCitiesbyPopinCountry(int number, String Country) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
@@ -821,6 +823,7 @@ public class App {
 
     }
 
+    //Method to display top N cities in a district by population
     public ArrayList<City> getTopNCitiesbyPopinDistrict(int number, String District) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
@@ -865,6 +868,51 @@ public class App {
         return cityList;
 
     }
+
+    //Method to display capital cities in the world by population
+    public ArrayList<CapitalCity> getCapitalCities() {
+        ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city "
+                            + "JOIN world.country ON city.CountryCode = country.Capital "
+                            + "ORDER BY Population DESC ";
+
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                CapitalCity capitalcity = new CapitalCity();
+                capitalcity.name = rset.getString("city.name");
+                capitalcity.country_name = rset.getString("country.name");
+                capitalcity.population = rset.getInt("city.population");
+                CapitalCityList.add(capitalcity);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
+        // Print each city's details
+        for (CapitalCity capitalcity : CapitalCityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s",
+                            capitalcity.name, capitalcity.country_name, capitalcity.population);
+            System.out.println(country_string);
+        }
+        return CapitalCityList;
+
+    }
+
 
 }
 
