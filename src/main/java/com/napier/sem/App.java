@@ -12,59 +12,62 @@ public class App {
         a.connect();
 
         //Method to get countries by population
-        a.getCountriesByPopulation();
+        //a.getCountriesByPopulation();
 
         // Method to get top N populated countries in the world
-        a.getTopNCountriesInWorldByPop(5);
+        //a.getTopNCountriesInWorldByPop(5);
 
         //Method to get top N populated countries in a continent
-        a.getTopNCountriesInContinentByPop(5, "Asia");
+        //a.getTopNCountriesInContinentByPop(5, "Asia");
 
 
         //Method to get top N populated countries in a region
-        a.getTopNCountriesInRegionByPop(10, "Caribbean");
+        //a.getTopNCountriesInRegionByPop(10, "Caribbean");
 
         //Method to display countries by population in continent
-        a.getCountriesInContByPop("Asia");
+        //a.getCountriesInContByPop("Asia");
 
         //Method to display countries by population in region
-        a.getCountriesInRegionByPop("Caribbean");
+        //a.getCountriesInRegionByPop("Caribbean");
 
         //Method to display cities in the world by population
-        a.getCitiesByPop();
+        //a.getCitiesByPop();
 
         //Method to display cities in the world by population in a continent
-        a.getCitiesByPopinAContinent("Europe");
+        //a.getCitiesByPopinAContinent("Europe");
 
         //Method to display cities in the world by population in a region
-        a.getCitiesbyPopinARegion("Caribbean");
+        //a.getCitiesbyPopinARegion("Caribbean");
 
         //Method to display cities in the world by population in a country
-        a.getCitiesbyPopinACountry("Barbados");
+        //a.getCitiesbyPopinACountry("Barbados");
 
         //Method to display cities in the world by population in a district
-        a.getCitiesbyPopinADistrict("Castries");
+        //a.getCitiesbyPopinADistrict("Castries");
 
         //Method to display top N cities in the world by population
-        a.getTopNCitiesbyPopinTheWorld(6);
+        //a.getTopNCitiesbyPopinTheWorld(6);
 
         //Method to display top N cities in a continent by population
-        a.getTopNCitiesbyPopinContinent(6,"Asia");
+        //a.getTopNCitiesbyPopinContinent(6,"Asia");
 
         //Method to display top N cities in a region by population
-        a.getTopNCitiesbyPopinRegion(4,"Caribbean");
+        //a.getTopNCitiesbyPopinRegion(4,"Caribbean");
 
         //Method to display top N cities in a country by population
-        a.getTopNCitiesbyPopinCountry(5,"Haiti");
+        //a.getTopNCitiesbyPopinCountry(5,"Haiti");
 
         //Method to display top N cities in a district by population
-        a.getTopNCitiesbyPopinDistrict(3,"Castries");
+        //a.getTopNCitiesbyPopinDistrict(3,"Castries");
 
-        //Method to display top capital cities in the world by population
-        a.getCapitalCities();
+        //Method to display capital cities in the world by population
+        //a.getCapitalCities();
 
-        //Method to display top capital cities in a continent by population
-        a.getCapitalCitiesinContinent("Europe");
+        //Method to display capital cities in a continent by population
+        //a.getCapitalCitiesinContinent("Europe");
+
+        //Method to display capital cities in a region by population
+        a.getCapitalCitiesinRegion("Caribbean");
 
 
 
@@ -930,6 +933,51 @@ public class App {
                             + "FROM world.city "
                             + "JOIN world.country ON city.ID = country.Capital "
                             + "WHERE country.continent = '" + Continent + "'"
+                            + "ORDER BY Population DESC ";
+
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                CapitalCity capitalcity = new CapitalCity();
+                capitalcity.name = rset.getString("city.name");
+                capitalcity.country_name = rset.getString("country.name");
+                capitalcity.population = rset.getInt("city.population");
+                CapitalCityList.add(capitalcity);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        // Print each city's details
+        for (CapitalCity capitalcity : CapitalCityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s",
+                            capitalcity.name, capitalcity.country_name, capitalcity.population);
+            System.out.println(country_string);
+        }
+        return CapitalCityList;
+
+    }
+
+    //Method to display capital cities in a region by population
+    public ArrayList<CapitalCity> getCapitalCitiesinRegion(String Region) {
+        ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city "
+                            + "JOIN world.country ON city.ID = country.Capital "
+                            + "WHERE country.region = '" + Region + "'"
                             + "ORDER BY Population DESC ";
 
 
