@@ -48,6 +48,9 @@ public class App {
         //Method to display top N cities in the world by population
         a.getTopNCitiesbyPopinTheWorld(6);
 
+        //Method to display top N cities in a continent by population
+        a.getTopNCitiesbyPopinContinent(6,"Asia");
+
         // Disconnect from database
         a.disconnect();
 
@@ -626,6 +629,7 @@ public class App {
 
     }
 
+    //Method to display top N cities by population in the world
     public ArrayList<City> getTopNCitiesbyPopinTheWorld(int number) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
@@ -636,6 +640,52 @@ public class App {
                     "SELECT city.Name, country.Name, city.District, city.Population "
                             + "FROM world.city "
                             + "JOIN world.country ON city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC "
+                            + "LIMIT " + number;
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("city.name");
+                city.country_name = rset.getString("country.name");
+                city.district = rset.getString("city.district");
+                city.population = rset.getInt("city.population");
+                cityList.add(city);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
+        // Print each city's details
+        for (City city : cityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s",
+                            city.name, city.country_name, city.district, city.population);
+            System.out.println(country_string);
+        }
+        return cityList;
+
+    }
+
+    //Method to display top N cities in a continent by population
+    public ArrayList<City> getTopNCitiesbyPopinContinent(int number, String Continent) {
+        ArrayList<City> cityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city "
+                            + "JOIN world.country ON city.CountryCode = country.Code "
+                            + "WHERE country.continent = '" + Continent + "'"
                             + "ORDER BY Population DESC "
                             + "LIMIT " + number;
 
