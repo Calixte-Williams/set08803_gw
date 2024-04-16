@@ -1107,5 +1107,50 @@ public class App {
 
     }
 
+    public ArrayList<CapitalCity> getTopNCapitalCitiesinaRegion(int number,String Region) {
+        ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM world.city "
+                            + "JOIN world.country ON city.ID = country.Capital "
+                            + "WHERE country.region = '" + Region + "'"
+                            + "ORDER BY Population DESC "
+                            + "LIMIT " + number;
+
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                CapitalCity capitalcity = new CapitalCity();
+                capitalcity.name = rset.getString("city.name");
+                capitalcity.country_name = rset.getString("country.name");
+                capitalcity.population = rset.getInt("city.population");
+                CapitalCityList.add(capitalcity);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        // Print each city's details
+        for (CapitalCity capitalcity : CapitalCityList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s",
+                            capitalcity.name, capitalcity.country_name, capitalcity.population);
+            System.out.println(country_string);
+        }
+        return CapitalCityList;
+
+    }
+
 }
 
