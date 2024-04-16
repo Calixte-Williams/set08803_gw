@@ -75,6 +75,9 @@ public class App {
         //Method to display top N capital cities in a continent by population
         a.getTopNCapitalCitiesinaContinent(5,"North America");
 
+        //Method to display top N capital cities in a region by population
+        a.getTopNCapitalCitiesinaRegion(3,"Caribbean");
+
 
 
         // Disconnect from database
@@ -1064,6 +1067,7 @@ public class App {
 
     }
 
+    //Method to display top N capital cities in a continent by population
     public ArrayList<CapitalCity> getTopNCapitalCitiesinaContinent(int number,String Continent) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
@@ -1109,6 +1113,7 @@ public class App {
 
     }
 
+    //Method to display top N capital cities in a region by population
     public ArrayList<CapitalCity> getTopNCapitalCitiesinaRegion(int number,String Region) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
