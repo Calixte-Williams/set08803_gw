@@ -879,7 +879,7 @@ public class App {
             String strSelect =
                     "SELECT city.Name, country.Name, city.District, city.Population "
                             + "FROM world.city "
-                            + "JOIN world.country ON city.CountryCode = country.Capital "
+                            + "JOIN world.country ON city.ID = country.Capital "
                             + "ORDER BY Population DESC ";
 
 
@@ -901,11 +901,11 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
-                    String.format("%-15s %-30s %-15s %-30s",
+                    String.format("%-15s %-30s %-15s",
                             capitalcity.name, capitalcity.country_name, capitalcity.population);
             System.out.println(country_string);
         }
