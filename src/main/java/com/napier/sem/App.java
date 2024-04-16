@@ -73,7 +73,7 @@ public class App {
         a.getTopNCapitalCities(5);
 
         //Method to display top N capital cities in a continent by population
-        a.getTopNCapitalCitiesinaContinent(5,"Asia");
+        a.getTopNCapitalCitiesinaContinent(5,"North America");
 
 
 
