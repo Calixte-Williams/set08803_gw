@@ -51,6 +51,9 @@ public class App {
         //Method to display top N cities in a continent by population
         a.getTopNCitiesbyPopinContinent(6,"Asia");
 
+        //Method to display top N cities in a region by population
+        a.getTopNCitiesbyPopinRegion(4,"Caribbean");
+
 
 
         // Disconnect from database
