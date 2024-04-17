@@ -49,16 +49,16 @@ public class App {
         a.getTopNCitiesbyPopinTheWorld(6);
 
         //Method to display top N cities in a continent by population
-        a.getTopNCitiesbyPopinContinent(6,"Asia");
+        a.getTopNCitiesbyPopinContinent(6, "Asia");
 
         //Method to display top N cities in a region by population
-        a.getTopNCitiesbyPopinRegion(4,"Caribbean");
+        a.getTopNCitiesbyPopinRegion(4, "Caribbean");
 
         //Method to display top N cities in a country by population
-        a.getTopNCitiesbyPopinCountry(5,"Haiti");
+        a.getTopNCitiesbyPopinCountry(5, "Haiti");
 
         //Method to display top N cities in a district by population
-        a.getTopNCitiesbyPopinDistrict(3,"Castries");
+        a.getTopNCitiesbyPopinDistrict(3, "Castries");
 
         //Method to display capital cities in the world by population
         a.getCapitalCities();
@@ -73,10 +73,10 @@ public class App {
         a.getTopNCapitalCities(5);
 
         //Method to display top N capital cities in a continent by population
-        a.getTopNCapitalCitiesinaContinent(5,"North America");
+        a.getTopNCapitalCitiesinaContinent(5, "North America");
 
         //Method to display top N capital cities in a region by population
-        a.getTopNCapitalCitiesinaRegion(3,"Caribbean");
+        a.getTopNCapitalCitiesinaRegion(3, "Caribbean");
 
         //Method to display the population of people , living in cities , and not living in cities in each continent
         a.getPopulationofPeopleinContinent();
@@ -86,6 +86,9 @@ public class App {
 
         //Method to display the population of people , living in cities , and not living in cities in each country
         a.getPopulationofPeopleinCountry();
+
+        //Method to display total world population
+        a.getTotalPopulation();
 
         // Disconnect from database
         a.disconnect();
@@ -908,7 +911,6 @@ public class App {
                             + "ORDER BY Population DESC ";
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -926,7 +928,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
@@ -954,7 +956,6 @@ public class App {
                             + "ORDER BY Population DESC ";
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -972,7 +973,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
@@ -999,7 +1000,6 @@ public class App {
                             + "ORDER BY Population DESC ";
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1017,7 +1017,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
@@ -1044,7 +1044,6 @@ public class App {
                             + "LIMIT " + number;
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1062,7 +1061,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
@@ -1075,7 +1074,7 @@ public class App {
     }
 
     //Method to display top N capital cities in a continent by population
-    public ArrayList<CapitalCity> getTopNCapitalCitiesinaContinent(int number,String Continent) {
+    public ArrayList<CapitalCity> getTopNCapitalCitiesinaContinent(int number, String Continent) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
             // Create an SQL statement
@@ -1090,7 +1089,6 @@ public class App {
                             + "LIMIT " + number;
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1108,7 +1106,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
@@ -1121,7 +1119,7 @@ public class App {
     }
 
     //Method to display top N capital cities in a region by population
-    public ArrayList<CapitalCity> getTopNCapitalCitiesinaRegion(int number,String Region) {
+    public ArrayList<CapitalCity> getTopNCapitalCitiesinaRegion(int number, String Region) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
             // Create an SQL statement
@@ -1136,7 +1134,6 @@ public class App {
                             + "LIMIT " + number;
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1154,7 +1151,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country" , "Population"));
+        System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
         for (CapitalCity capitalcity : CapitalCityList) {
             String country_string =
@@ -1186,7 +1183,6 @@ public class App {
                             "ORDER BY country.Continent";
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1205,7 +1201,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population" , "In Cities" , "Not in Cities"));
+        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population", "In Cities", "Not in Cities"));
         // Print each city's details
         for (Population population : PopulationList) {
             String country_string =
@@ -1238,7 +1234,6 @@ public class App {
                             "ORDER BY country.region";
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1257,7 +1252,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population" , "In Cities" , "Not In Cities"));
+        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population", "In Cities", "Not In Cities"));
         // Print each city's details
         for (Population population : PopulationList) {
             String country_string =
@@ -1289,7 +1284,6 @@ public class App {
                             "ORDER BY country.name";
 
 
-
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Process the result set and add to the list
@@ -1308,7 +1302,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population" , "In Cities" , "Not In Cities"));
+        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population", "In Cities", "Not In Cities"));
         // Print each city's details
         for (Population population : PopulationList) {
             String country_string =
@@ -1319,6 +1313,33 @@ public class App {
         return PopulationList;
 
     }
+
+    //Method to display the total population of the world
+    public long getTotalPopulation() {
+        long totalPopulation = 0;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(country.population) AS total_population "
+                            + "FROM country "
+                            + "JOIN city ON country.capital = city.ID";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set
+            if (rset.next()) {
+                totalPopulation = rset.getLong("total_population");
+                System.out.println("Total population of all countries: " + totalPopulation);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total population");
+        }
+        return totalPopulation;
+    }
+
 
 }
 
