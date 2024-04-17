@@ -12,72 +12,74 @@ public class App {
         a.connect();
 
         //Method to get countries by population
-        a.getCountriesByPopulation();
+        //a.getCountriesByPopulation();
 
         // Method to get top N populated countries in the world
-        a.getTopNCountriesInWorldByPop(5);
+        //a.getTopNCountriesInWorldByPop(5);
 
         //Method to get top N populated countries in a continent
-        a.getTopNCountriesInContinentByPop(5, "Asia");
+        //a.getTopNCountriesInContinentByPop(5, "Asia");
 
 
         //Method to get top N populated countries in a region
-        a.getTopNCountriesInRegionByPop(10, "Caribbean");
+        //a.getTopNCountriesInRegionByPop(10, "Caribbean");
 
         //Method to display countries by population in continent
-        a.getCountriesInContByPop("Asia");
+        //a.getCountriesInContByPop("Asia");
 
         //Method to display countries by population in region
-        a.getCountriesInRegionByPop("Caribbean");
+        //a.getCountriesInRegionByPop("Caribbean");
 
         //Method to display cities in the world by population
-        a.getCitiesByPop();
+        //a.getCitiesByPop();
 
         //Method to display cities in the world by population in a continent
-        a.getCitiesByPopinAContinent("Europe");
+        //a.getCitiesByPopinAContinent("Europe");
 
         //Method to display cities in the world by population in a region
-        a.getCitiesbyPopinARegion("Caribbean");
+        //a.getCitiesbyPopinARegion("Caribbean");
 
         //Method to display cities in the world by population in a country
-        a.getCitiesbyPopinACountry("Barbados");
+        //a.getCitiesbyPopinACountry("Barbados");
 
         //Method to display cities in the world by population in a district
-        a.getCitiesbyPopinADistrict("Castries");
+        //a.getCitiesbyPopinADistrict("Castries");
 
         //Method to display top N cities in the world by population
-        a.getTopNCitiesbyPopinTheWorld(6);
+        //a.getTopNCitiesbyPopinTheWorld(6);
 
         //Method to display top N cities in a continent by population
-        a.getTopNCitiesbyPopinContinent(6,"Asia");
+        //a.getTopNCitiesbyPopinContinent(6,"Asia");
 
         //Method to display top N cities in a region by population
-        a.getTopNCitiesbyPopinRegion(4,"Caribbean");
+        //a.getTopNCitiesbyPopinRegion(4,"Caribbean");
 
         //Method to display top N cities in a country by population
-        a.getTopNCitiesbyPopinCountry(5,"Haiti");
+        //a.getTopNCitiesbyPopinCountry(5,"Haiti");
 
         //Method to display top N cities in a district by population
-        a.getTopNCitiesbyPopinDistrict(3,"Castries");
+        //a.getTopNCitiesbyPopinDistrict(3,"Castries");
 
         //Method to display capital cities in the world by population
-        a.getCapitalCities();
+        //a.getCapitalCities();
 
         //Method to display capital cities in a continent by population
-        a.getCapitalCitiesinContinent("Europe");
+        //a.getCapitalCitiesinContinent("Europe");
 
         //Method to display capital cities in a region by population
-        a.getCapitalCitiesinRegion("Caribbean");
+        //a.getCapitalCitiesinRegion("Caribbean");
 
         //Method to display top N capital cities by population
-        a.getTopNCapitalCities(5);
+        //a.getTopNCapitalCities(5);
 
         //Method to display top N capital cities in a continent by population
-        a.getTopNCapitalCitiesinaContinent(5,"North America");
+        //a.getTopNCapitalCitiesinaContinent(5,"North America");
 
         //Method to display top N capital cities in a region by population
-        a.getTopNCapitalCitiesinaRegion(3,"Caribbean");
+        //a.getTopNCapitalCitiesinaRegion(3,"Caribbean");
 
+        //Method to display the population of people , living in cities , and not living in cities in each continent
+        a.getPopulationofPeopleinContinent();
 
 
         // Disconnect from database
@@ -1154,6 +1156,57 @@ public class App {
             System.out.println(country_string);
         }
         return CapitalCityList;
+
+    }
+
+    //Method to display the population of people , people living in cities and people not living in cities in each continent
+    public ArrayList<Population> getPopulationofPeopleinContinent() {
+        ArrayList<Population> PopulationList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Continent, " +
+                            "SUM(city.Population) AS inCity, " +
+                            "SUM(DISTINCT(country.Population)) - SUM(city.Population) AS outCity, " +
+                            "SUM(DISTINCT(country.Population)) AS totalPopulation, " +
+                            "SUM(city.Population) / SUM(DISTINCT(country.Population)) * 100 AS inCityPercentage, " +
+                            "(SUM(DISTINCT(country.Population)) - SUM(city.Population)) / SUM(DISTINCT(country.Population)) * 100 AS outCityPercentage " +
+                            "FROM country " +
+                            "LEFT JOIN city ON country.Code = city.CountryCode " +
+                            "GROUP BY country.Continent " +
+                            "ORDER BY country.Continent";
+
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Population population = new Population();
+                population.name = rset.getString("Continent");
+                population.total_population = rset.getLong("totalPopulation");
+                population.total_populationincities = rset.getDouble("inCityPercentage");
+                population.total_populationnotincities = rset.getDouble("outCityPercentage");
+                PopulationList.add(population);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Total Population" , "Popu. in Cities" , "Popu. Not Living in Cities"));
+        // Print each city's details
+        for (Population population : PopulationList) {
+            String country_string =
+                    String.format("%-15s %-30s %-15s %-30s",
+                            population.name, population.total_population, population.total_populationincities, population.total_populationnotincities);
+            System.out.println(country_string);
+        }
+        return PopulationList;
 
     }
 
