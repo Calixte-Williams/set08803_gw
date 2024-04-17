@@ -1198,12 +1198,12 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Total Population" , "Popu. in Cities" , "Popu. Not Living in Cities"));
+        System.out.println(String.format("%-15s %-30s %-30s %-15s", "Name", "Total Population" , "Popu. in Cities" , "Popu. Not in Cities"));
         // Print each city's details
         for (Population population : PopulationList) {
             String country_string =
-                    String.format("%-15s %-30s %-15s %-30s",
-                            population.name, population.total_population, population.total_populationincities, population.total_populationnotincities);
+                    String.format("%-15s %-30s %-30s %-15s",
+                            population.name, population.total_population, population.total_populationincities + "%", population.total_populationnotincities + "%");
             System.out.println(country_string);
         }
         return PopulationList;
