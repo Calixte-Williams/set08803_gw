@@ -81,6 +81,9 @@ public class App {
         //Method to display the population of people , living in cities , and not living in cities in each continent
         a.getPopulationofPeopleinContinent();
 
+        //Method to display the population of people , living in cities , and not living in cities in each region
+        a.getPopulationofPeopleinRegion();
+
 
         // Disconnect from database
         a.disconnect();
@@ -1211,6 +1214,56 @@ public class App {
     }
 
 
+    //Method to display the population of people , living in cities and people not living in cities in each region
+    public ArrayList<Population> getPopulationofPeopleinRegion() {
+        ArrayList<Population> PopulationList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Region, " +
+                            "SUM(city.Population) AS inCity, " +
+                            "SUM(DISTINCT(country.Population)) - SUM(city.Population) AS outCity, " +
+                            "SUM(DISTINCT(country.Population)) AS totalPopulation, " +
+                            "SUM(city.Population) / SUM(DISTINCT(country.Population)) * 100 AS inCityPercentage, " +
+                            "(SUM(DISTINCT(country.Population)) - SUM(city.Population)) / SUM(DISTINCT(country.Population)) * 100 AS outCityPercentage " +
+                            "FROM country " +
+                            "LEFT JOIN city ON country.Code = city.CountryCode " +
+                            "GROUP BY country.region " +
+                            "ORDER BY country.region";
+
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Population population = new Population();
+                population.name = rset.getString("Region");
+                population.total_population = rset.getLong("totalPopulation");
+                population.total_populationincities = rset.getDouble("inCityPercentage");
+                population.total_populationnotincities = rset.getDouble("outCityPercentage");
+                PopulationList.add(population);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+
+        // Print header
+        System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population" , "In Cities" , "Not In Cities"));
+        // Print each city's details
+        for (Population population : PopulationList) {
+            String country_string =
+                    String.format("%-45s %-30s %-15s %-6s",
+                            population.name, population.total_population, population.total_populationincities + "%", population.total_populationnotincities + "%");
+            System.out.println(country_string);
+        }
+        return PopulationList;
+
+    }
 
 }
 
