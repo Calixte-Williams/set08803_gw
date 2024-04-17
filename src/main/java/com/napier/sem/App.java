@@ -99,6 +99,9 @@ public class App {
         //Method to display total population of a country
         a.getTotalPopulationofCountry("Barbados");
 
+        //Method to display total population of a district
+        a.getTotalPopulationofDistrict("Castries");
+
         
 
         // Disconnect from database
@@ -1417,6 +1420,30 @@ public class App {
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
                 System.out.println("Total population of  " + Country + " :"  + totalPopulation);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total population");
+        }
+        return totalPopulation;
+    }
+
+    //Method to display the total population of a district
+    public long getTotalPopulationofDistrict(String District) {
+        long totalPopulation = 0;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(population) AS total_population FROM city WHERE city.district = '" + District + "'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set
+            if (rset.next()) {
+                totalPopulation = rset.getLong("total_population");
+                System.out.println("Total population of  " + District + " :"  + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
