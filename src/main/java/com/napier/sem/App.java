@@ -102,6 +102,9 @@ public class App {
         //Method to display total population of a district
         a.getTotalPopulationofDistrict("Castries");
 
+        //Method to display total population of a city
+        a.getTotalPopulationofCity("Georgetown");
+
         
 
         // Disconnect from database
@@ -1451,6 +1454,33 @@ public class App {
         }
         return totalPopulation;
     }
+
+
+    //Method to display the total population of a city
+    public long getTotalPopulationofCity(String City) {
+        long totalPopulation = 0;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(population) AS total_population FROM city WHERE city.name = '" + City + "'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set
+            if (rset.next()) {
+                totalPopulation = rset.getLong("total_population");
+                System.out.println("Total population of  " + City + " :"  + totalPopulation);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total population");
+        }
+        return totalPopulation;
+    }
+
+
 
 }
 
