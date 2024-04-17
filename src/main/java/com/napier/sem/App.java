@@ -91,7 +91,7 @@ public class App {
         a.getTotalPopulation();
 
         //Method to display total population of a continent
-        a.getTotalPopulationofContinent("Asia");
+         a.getTotalPopulationofContinent("Asia");
 
         //Method to display total population of a region
         a.getTotalPopulationofRegion("Caribbean");
@@ -105,9 +105,9 @@ public class App {
         //Method to display total population of a city
         a.getTotalPopulationofCity("Georgetown");
 
-        
+        //Method to display language speakers in the world
+        a.getLanguageSpeakers();
 
-        
 
         // Disconnect from database
         a.disconnect();
@@ -1374,7 +1374,7 @@ public class App {
             // Process the result set
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
-                System.out.println("Total population of all countries in " + Continent + ":"  + totalPopulation);
+                System.out.println("Total population of all countries in " + Continent + ":" + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -1399,7 +1399,7 @@ public class App {
             // Process the result set
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
-                System.out.println("Total population of all countries in " + Region + ":"  + totalPopulation);
+                System.out.println("Total population of all countries in " + Region + ":" + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -1424,7 +1424,7 @@ public class App {
             // Process the result set
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
-                System.out.println("Total population of  " + Country + " :"  + totalPopulation);
+                System.out.println("Total population of  " + Country + " :" + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -1448,7 +1448,7 @@ public class App {
             // Process the result set
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
-                System.out.println("Total population of  " + District + " :"  + totalPopulation);
+                System.out.println("Total population of  " + District + " :" + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -1473,7 +1473,7 @@ public class App {
             // Process the result set
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
-                System.out.println("Total population of  " + City + " :"  + totalPopulation);
+                System.out.println("Total population of  " + City + " :" + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -1483,6 +1483,51 @@ public class App {
     }
 
 
+    //Method to display the total he number of people who speak the Chinese , English , Hindi , Spanish and Arabic the following languages from greatest number to smallest, including the percentage of the world population:
+    public ArrayList<Language> getLanguageSpeakers() {
+
+        ArrayList<Language> LanguageList = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT q.Language, q.TotalSpeakers, " +
+                            "(q.TotalSpeakers / (SELECT SUM(c.Population) FROM country c)) * 100 AS WorldPercent " +
+                            "FROM (SELECT cl.Language, SUM(c.Population) AS TotalSpeakers " +
+                            "FROM countrylanguage cl INNER JOIN country c ON cl.CountryCode = c.Code " +
+                            "WHERE cl.Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic') " +
+                            "GROUP BY cl.Language) AS q " +
+                            "ORDER BY WorldPercent DESC;";
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set and add to the list
+            while (rset.next()) {
+                Language language = new Language();
+                language.language_name = rset.getString("Language");
+                language.total_speakers = rset.getLong("TotalSpeakers");
+                language.world_percentage = rset.getLong("WorldPercent");
+                LanguageList.add(language);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get language details");
+            return null;
+        }
+        // Print header
+        System.out.println(String.format("%-45s %-30s %-15s", "Language", "Total Speakers", "World Percentage of Speakers"));
+        // Print each city's details
+        for (Language language : LanguageList) {
+            String country_string =
+                    String.format("%-45s %-30s %-15s",
+                            language.language_name, language.total_speakers, language.world_percentage + "%");
+            System.out.println(country_string);
+        }
+        return LanguageList;
+
+    }
+
 
 }
-
