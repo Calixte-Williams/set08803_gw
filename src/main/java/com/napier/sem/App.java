@@ -96,6 +96,8 @@ public class App {
         //Method to display total population of a region
         a.getTotalPopulationofRegion("Caribbean");
 
+        
+
         // Disconnect from database
         a.disconnect();
 
