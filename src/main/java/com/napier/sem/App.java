@@ -96,6 +96,9 @@ public class App {
         //Method to display total population of a region
         a.getTotalPopulationofRegion("Caribbean");
 
+        //Method to display total population of a country
+        a.getTotalPopulationofCountry("Barbados");
+
         
 
         // Disconnect from database
@@ -1387,6 +1390,31 @@ public class App {
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
                 System.out.println("Total population of all countries in " + Region + ":"  + totalPopulation);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total population");
+        }
+        return totalPopulation;
+    }
+
+
+    //Method to display the total population of a country
+    public long getTotalPopulationofCountry(String Country) {
+        long totalPopulation = 0;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(population) AS total_population FROM country WHERE country.name = '" + Country + "'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set
+            if (rset.next()) {
+                totalPopulation = rset.getLong("total_population");
+                System.out.println("Total population of  " + Country + " :"  + totalPopulation);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
