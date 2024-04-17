@@ -90,6 +90,9 @@ public class App {
         //Method to display total world population
         a.getTotalPopulation();
 
+        //Method to display total population of a continent
+        a.getTotalPopulationofContinent("Asia");
+
         // Disconnect from database
         a.disconnect();
 
@@ -1322,6 +1325,33 @@ public class App {
             String strSelect =
                     "SELECT SUM(country.population) AS total_population "
                             + "FROM country "
+                            + "JOIN city ON country.capital = city.ID";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Process the result set
+            if (rset.next()) {
+                totalPopulation = rset.getLong("total_population");
+                System.out.println("Total population of all countries: " + totalPopulation);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total population");
+        }
+        return totalPopulation;
+    }
+
+    //Method to display the total population of a continent
+    public long getTotalPopulationofContinent(String Continent) {
+        long totalPopulation = 0;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(country.population) AS total_population "
+                            + "FROM country "
+                            + "WHERE continent = '" + Continent + "'"
                             + "JOIN city ON country.capital = city.ID";
 
             // Execute SQL statement
