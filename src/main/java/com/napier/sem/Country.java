@@ -24,3 +24,4 @@ public class Country {
     /* Capital */
     public String country_capital;
 }
+
