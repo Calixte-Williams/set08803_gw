@@ -206,6 +206,14 @@ public class App {
             return null;
         }
 
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Countries by Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Print each country's details
@@ -251,6 +259,13 @@ public class App {
             System.out.println("Failed to get country details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Countries In The World Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
@@ -303,6 +318,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Countries In The Region Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Print each country's details
@@ -353,7 +375,13 @@ public class App {
             return null;
         }
 
-        // Print header
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Countries In The Continent Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Print each country's details
         for (Country country : countryList) {
@@ -397,6 +425,14 @@ public class App {
             System.out.println("Failed to get country details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Countries In The Continent Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
@@ -444,6 +480,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Countries In The Region Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s %-15s %-15s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Print each country's details
@@ -486,6 +529,13 @@ public class App {
             System.out.println("Failed to get city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Cities In The World Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
@@ -534,6 +584,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Cities Sorted By Population In A Continent:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
         // Print each country's details
@@ -580,6 +637,13 @@ public class App {
             System.out.println("Failed to get city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Cities Sorted by Population In A Region:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
@@ -628,6 +692,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Cities Sorted by Population In A Country:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
         // Print each country's details
@@ -674,6 +745,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Cities Sorted by Population In A District:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
         // Print each city's details
@@ -718,6 +796,13 @@ public class App {
             System.out.println("Failed to get city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Cities Sorted by Population In The World:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
@@ -765,6 +850,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Cities Sorted by Population in A Continent:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
         // Print each city's details
@@ -810,6 +902,13 @@ public class App {
             System.out.println("Failed to get city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Cities Sorted by Population In A Region:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
@@ -857,6 +956,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Cities Sorted by Population In A Country:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
         // Print each city's details
@@ -903,6 +1009,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Cities Sorted by Population in A District:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s %-30s", "Name", "Country", "District", "Population"));
         // Print each city's details
@@ -945,6 +1058,13 @@ public class App {
             System.out.println("Failed to get capital city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Capital Cities In The World By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
@@ -991,6 +1111,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Capital Cities In A Continent Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
@@ -1035,6 +1162,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Capital Cities In A Region Sorted By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
@@ -1078,6 +1212,13 @@ public class App {
             System.out.println("Failed to get capital city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Capital Cities By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
@@ -1124,6 +1265,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Capital Cities In A Continent By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
         // Print each city's details
@@ -1168,6 +1316,13 @@ public class App {
             System.out.println("Failed to get capital city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Top N Capital Cities In A Region By Population:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-15s %-30s %-15s", "Name", "Country", "Population"));
@@ -1218,6 +1373,13 @@ public class App {
             System.out.println("Failed to get capital city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Population of People Per Continent:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population", "In Cities", "Not in Cities"));
@@ -1270,6 +1432,13 @@ public class App {
             return null;
         }
 
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Population Of People Per Region:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population", "In Cities", "Not In Cities"));
         // Print each city's details
@@ -1319,6 +1488,13 @@ public class App {
             System.out.println("Failed to get capital city details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Population Of People Per Country:");
+        // Print a blank line after the heading
+        System.out.print("\n");
 
         // Print header
         System.out.println(String.format("%-45s %-30s %-15s %-6s", "Name", "Total Population", "In Cities", "Not In Cities"));
@@ -1516,6 +1692,14 @@ public class App {
             System.out.println("Failed to get language details");
             return null;
         }
+
+        // Print a blank line before the heading
+        System.out.print("\n");
+        // Print heading
+        System.out.println("Total Number Of Speakers Per Language:");
+        // Print a blank line after the heading
+        System.out.print("\n");
+
         // Print header
         System.out.println(String.format("%-45s %-30s %-15s", "Language", "Total Speakers", "World Percentage of Speakers"));
         // Print each city's details
