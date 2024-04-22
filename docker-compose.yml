@@ -5,8 +5,8 @@ services:
     build: .
 
   # Application Test Dockerfile is in /src/test folder
-  apptest:
-    build: src/test/.
+  #apptest:
+  #  build: src/test/.
 
   # db is in world folder
   db:

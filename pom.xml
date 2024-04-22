@@ -38,15 +38,6 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.1.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.napier.sem</groupId>
-            <artifactId>set08803_gw</artifactId>
-            <classifier>tests</classifier>
-            <type>test-jar</type>
-            <version>0.1</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -71,18 +62,6 @@
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
                         </goals>
                     </execution>
                 </executions>

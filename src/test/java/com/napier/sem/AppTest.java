@@ -15,14 +15,14 @@ public class AppTest {
     static void init()
     {
         app = new App();
-        //app.connect();
+        app.connect();
+        
     }
-
-
 
     @Test
     void getTopNCountriesInWorldByPopTestFive()
     {
-        //app.getTopNCountriesInWorldByPop(5);
+        app.getTopNCountriesInWorldByPop(5);
+        app.disconnect();
     }
 }
