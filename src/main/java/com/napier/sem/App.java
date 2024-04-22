@@ -207,10 +207,11 @@ public class App {
         }
 
 
+
         // Print a blank line before the heading
         System.out.print("\n");
         // Print heading
-        System.out.println("Countries by Population:");
+        System.out.println("Countries Sorted by Population:");
         // Print a blank line after the heading
         System.out.print("\n");
 
@@ -1062,7 +1063,7 @@ public class App {
         // Print a blank line before the heading
         System.out.print("\n");
         // Print heading
-        System.out.println("Capital Cities In The World By Population:");
+        System.out.println("Capital Cities In The World Sorted By Population:");
         // Print a blank line after the heading
         System.out.print("\n");
 
@@ -1216,7 +1217,7 @@ public class App {
         // Print a blank line before the heading
         System.out.print("\n");
         // Print heading
-        System.out.println("Top N Capital Cities By Population:");
+        System.out.println("Top N Capital Cities Sorted By Population:");
         // Print a blank line after the heading
         System.out.print("\n");
 
@@ -1268,7 +1269,7 @@ public class App {
         // Print a blank line before the heading
         System.out.print("\n");
         // Print heading
-        System.out.println("Top N Capital Cities In A Continent By Population:");
+        System.out.println("Top N Capital Cities In A Continent Sorted By Population:");
         // Print a blank line after the heading
         System.out.print("\n");
 
@@ -1320,7 +1321,7 @@ public class App {
         // Print a blank line before the heading
         System.out.print("\n");
         // Print heading
-        System.out.println("Top N Capital Cities In A Region By Population:");
+        System.out.println("Top N Capital Cities In A Region Sorted By Population:");
         // Print a blank line after the heading
         System.out.print("\n");
 
@@ -1523,6 +1524,10 @@ public class App {
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Print a blank line before showing results
+            System.out.print("\n");
+
             // Process the result set
             if (rset.next()) {
                 totalPopulation = rset.getLong("total_population");
@@ -1532,7 +1537,7 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get total population");
         }
-        return totalPopulation;
+             return totalPopulation;
     }
 
     //Method to display the total population of a continent
