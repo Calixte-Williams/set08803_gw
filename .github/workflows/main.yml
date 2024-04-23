@@ -16,13 +16,13 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn -B package -DskipTests --file pom.xml
+        run: mvn -B package -DskipTests
       - name: Start Environment - Start Docker Compose
-        run: docker-compose up
+        run: docker-compose up db
       - name: Run JUnit Tests
         run: mvn test -Dtest=com.napier.sem.AppTest test
       - name: Shutdown Docker Compose
-        run: docker-compose down
+        run: docker-compose down db
 
   build:
     name: Build and Start Using docker-compose
