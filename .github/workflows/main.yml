@@ -18,7 +18,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package -DskipTests
       - name: Start Environment - Start Docker Compose
-        run: docker-compose up db
+        run: docker-compose up -d db
       - name: Run JUnit Tests
         run: mvn test -Dtest=com.napier.sem.AppTest test
       - name: Shutdown Docker Compose
