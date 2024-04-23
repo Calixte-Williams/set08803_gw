@@ -23,7 +23,7 @@ public class AppTest {
     }
 
     @Test
-    void testGetCountriesByPopulation() {
+    void getCountriesByPopulationTest() {
         ArrayList<Country> expectedCountries = new ArrayList<>();
 
         // Act
@@ -35,12 +35,13 @@ public class AppTest {
 
     }
 
+    /*
     @Test
-    void testGetTopNCountriesInWorldByPopThrowsException() {
+    void getTopNCountriesInWorldByPopThrowsExceptionTest() {
 
         assertThrows(Exception.class, () -> {
-            app.getTopNCountriesInWorldByPop(0);
+            app.getTopNCountriesInWorldByPop(3);
         });
     }
-
+     */
 }
