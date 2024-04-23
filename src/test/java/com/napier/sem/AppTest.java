@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,6 +23,7 @@ public class AppTest {
 
     }
 
+    /*
     @Test
     void getCountriesByPopulationTest() {
         ArrayList<Country> expectedCountries = new ArrayList<>();
@@ -35,13 +37,35 @@ public class AppTest {
 
     }
 
-    /*
+     */
+
+
     @Test
     void getTopNCountriesInWorldByPopThrowsExceptionTest() {
+        ArrayList<Country> expectedCountries = new ArrayList<>();
 
+        // Act
+        ArrayList<Country> actualCountries = app.getTopNCountriesInWorldByPop(3);
+
+        // Assert
+        //Expects the total number of Countries from the World DB (232) and fails if incorrect.
+        assertEquals(3, actualCountries.size());
+
+
+        /*
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+            //Code under test
+            app.getTopNCountriesInWorldByPop(3);
+        });
+
+        Assertions.assertEquals("Fail! Invalid Number input for Query", thrown.getMessage());
+    }
+
+        /*
         assertThrows(Exception.class, () -> {
             app.getTopNCountriesInWorldByPop(3);
         });
+
+         */
     }
-     */
 }
