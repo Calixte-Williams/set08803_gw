@@ -215,8 +215,6 @@ public class App {
             return null;
         }
 
-
-
         // Print a blank line before the heading
         System.out.print("\n");
         // Print heading
@@ -241,8 +239,8 @@ public class App {
     public ArrayList<Country> getTopNCountriesInWorldByPop(Integer number) {
         ArrayList<Country> countryList = new ArrayList<>();
             try {
+                //Input Validation
                 if (number == null || number <= 0) throw new Exception ("Fail! Invalid Number input for Query");
-
 
                 // Create an SQL statement
                 Statement stmt = con.createStatement();
@@ -295,9 +293,12 @@ public class App {
     /** Method to display the top N populated countries in a region where N is provided by the user
      *
      */
-    public ArrayList<Country> getTopNCountriesInRegionByPop(int number, String Region) {
+    public ArrayList<Country> getTopNCountriesInRegionByPop(Integer number, String Region) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -352,9 +353,12 @@ public class App {
 
 
     //Method to display the top N populated countries in continent
-    public ArrayList<Country> getTopNCountriesInContinentByPop(int number, String Continent) {
+    public ArrayList<Country> getTopNCountriesInContinentByPop(Integer number, String Continent) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -410,6 +414,9 @@ public class App {
     public ArrayList<Country> getCountriesInContByPop(String Continent) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
+            //Input Validation
+            if (Continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -464,6 +471,9 @@ public class App {
     public ArrayList<Country> getCountriesInRegionByPop(String Region) {
         ArrayList<Country> countryList = new ArrayList<>();
         try {
+            //Input Validation
+            if (Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -568,6 +578,9 @@ public class App {
     public ArrayList<City> getCitiesByPopinAContinent(String continent) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -622,6 +635,9 @@ public class App {
     public ArrayList<City> getCitiesbyPopinARegion(String Region) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -676,6 +692,9 @@ public class App {
     public ArrayList<City> getCitiesbyPopinACountry(String Country) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (Country == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -729,6 +748,9 @@ public class App {
     public ArrayList<City> getCitiesbyPopinADistrict(String District) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (District == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -779,9 +801,12 @@ public class App {
     }
 
     //Method to display top N cities by population in the world
-    public ArrayList<City> getTopNCitiesbyPopinTheWorld(int number) {
+    public ArrayList<City> getTopNCitiesbyPopinTheWorld(Integer number) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0) throw new Exception ("Fail! Invalid Number input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -831,9 +856,12 @@ public class App {
     }
 
     //Method to display top N cities in a continent by population
-    public ArrayList<City> getTopNCitiesbyPopinContinent(int number, String Continent) {
+    public ArrayList<City> getTopNCitiesbyPopinContinent(Integer number, String Continent) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -884,9 +912,12 @@ public class App {
     }
 
     //Method to display top N cities in a region by population
-    public ArrayList<City> getTopNCitiesbyPopinRegion(int number, String Region) {
+    public ArrayList<City> getTopNCitiesbyPopinRegion(Integer number, String Region) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -937,9 +968,12 @@ public class App {
     }
 
     //Method to display top N cities in a country by population
-    public ArrayList<City> getTopNCitiesbyPopinCountry(int number, String Country) {
+    public ArrayList<City> getTopNCitiesbyPopinCountry(Integer number, String Country) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Country == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -990,9 +1024,12 @@ public class App {
     }
 
     //Method to display top N cities in a district by population
-    public ArrayList<City> getTopNCitiesbyPopinDistrict(int number, String District) {
+    public ArrayList<City> getTopNCitiesbyPopinDistrict(Integer number, String District) {
         ArrayList<City> cityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0) throw new Exception ("Fail! Invalid Number input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1097,6 +1134,9 @@ public class App {
     public ArrayList<CapitalCity> getCapitalCitiesinContinent(String Continent) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (Continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1148,6 +1188,9 @@ public class App {
     public ArrayList<CapitalCity> getCapitalCitiesinRegion(String Region) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1196,9 +1239,12 @@ public class App {
     }
 
     //Method to display top N capital cities by population
-    public ArrayList<CapitalCity> getTopNCapitalCities(int number) {
+    public ArrayList<CapitalCity> getTopNCapitalCities(Integer number) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0) throw new Exception ("Fail! Invalid Number input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1247,9 +1293,12 @@ public class App {
     }
 
     //Method to display top N capital cities in a continent by population
-    public ArrayList<CapitalCity> getTopNCapitalCitiesinaContinent(int number, String Continent) {
+    public ArrayList<CapitalCity> getTopNCapitalCitiesinaContinent(Integer number, String Continent) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1299,9 +1348,12 @@ public class App {
     }
 
     //Method to display top N capital cities in a region by population
-    public ArrayList<CapitalCity> getTopNCapitalCitiesinaRegion(int number, String Region) {
+    public ArrayList<CapitalCity> getTopNCapitalCitiesinaRegion(Integer number, String Region) {
         ArrayList<CapitalCity> CapitalCityList = new ArrayList<>();
         try {
+            //Input Validation
+            if (number == null || number <= 0 || Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1556,6 +1608,9 @@ public class App {
     public long getTotalPopulationofContinent(String Continent) {
         long totalPopulation = 0;
         try {
+            //Input Validation
+            if (Continent == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1581,6 +1636,9 @@ public class App {
     public long getTotalPopulationofRegion(String Region) {
         long totalPopulation = 0;
         try {
+            //Input Validation
+            if (Region == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1606,6 +1664,9 @@ public class App {
     public long getTotalPopulationofCountry(String Country) {
         long totalPopulation = 0;
         try {
+            //Input Validation
+            if (Country  == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1630,6 +1691,9 @@ public class App {
     public long getTotalPopulationofDistrict(String District) {
         long totalPopulation = 0;
         try {
+            //Input Validation
+            if (District == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -1655,6 +1719,9 @@ public class App {
     public long getTotalPopulationofCity(String City) {
         long totalPopulation = 0;
         try {
+            //Input Validation
+            if (City == null) throw new Exception ("Fail! Invalid input for Query");
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
