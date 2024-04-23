@@ -15,8 +15,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Start Environment
-        run: mvn docker-compose up
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+      - name: Start Environment - Start Docker Compose
+        run: docker-compose up
       - name: Run JUnit Tests
         run: mvn test -Dtest=com.napier.sem.AppTest test
       - name: Shutdown Docker Compose
