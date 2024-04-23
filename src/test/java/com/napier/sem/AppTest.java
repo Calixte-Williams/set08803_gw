@@ -19,13 +19,14 @@ public class AppTest {
     @BeforeAll
     static void init() {
         app = new App();
-        app.connect("localhost:33060", 10000);
+        //app.connect("localhost:33060", 30000);
 
     }
 
-    /*
+
     @Test
     void getCountriesByPopulationTest() {
+        app.connect("localhost:33060", 30000);
         ArrayList<Country> expectedCountries = new ArrayList<>();
 
         // Act
@@ -37,12 +38,10 @@ public class AppTest {
 
     }
 
-     */
-
 
     @Test
     void getTopNCountriesInWorldByPopThrowsExceptionTest() {
-        ArrayList<Country> expectedCountries = new ArrayList<>();
+        app.connect("localhost:33060", 30000);
 
         // Act
         ArrayList<Country> actualCountries = app.getTopNCountriesInWorldByPop(3);
