@@ -11,7 +11,7 @@ public class App {
         // Connect to database
         //a.connect();
         if (args.length < 1) {
-            a.connect("localhost:33060", 30000);
+            a.connect("localhost:33060", 10000);
         } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
@@ -139,7 +139,7 @@ public class App {
         }
 
         // Connection to the database
-        int retries = 100;
+        int retries = 10;
         boolean shouldWait = false;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
@@ -148,16 +148,10 @@ public class App {
                     // Wait a bit for db to start
                     Thread.sleep(delay);
                 }
-                // Wait a bit for db to start
-                //Thread.sleep(30000);
-
                 // Connect to database
-                //con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "w0rldDBp@ss");
                 con = DriverManager.getConnection("jdbc:mysql://" + location
                         + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "w0rldDBp@ss");
                 System.out.println("Successfully connected");
-                // Wait a bit
-                //Thread.sleep(10000);
                 // Exit for loop
                 break;
             } catch (SQLException sqle) {
@@ -188,7 +182,6 @@ public class App {
             }
         }
     }
-
 
     //Method to display countries sorted by population
     public ArrayList<Country> getCountriesByPopulation() {
