@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY ./target/set08803_gw-0.1.0.6-jar-with-dependencies.jar /tmp
+COPY ./target/set08803_gw.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "set08803_gw-0.1.0.6-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "set08803_gw.jar", "db:3306", "10000"]
