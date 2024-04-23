@@ -9,7 +9,12 @@ public class App {
         App a = new App();
 
         // Connect to database
-        a.connect();
+        //a.connect();
+        if (args.length < 1) {
+            a.connect("localhost:33060", 10000);
+        } else {
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         //Method to get countries by population
         a.getCountriesByPopulation();
@@ -124,7 +129,7 @@ public class App {
      * Connect to the MySQL database.
      */
 
-    public void connect() {
+    public void connect(String location, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -134,22 +139,33 @@ public class App {
         }
 
         // Connection to the database
-        int retries = 100;
+        int retries = 10;
+        boolean shouldWait = false;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
+                if (shouldWait) {
+                    // Wait a bit for db to start
+                    Thread.sleep(delay);
+                }
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                //Thread.sleep(30000);
+
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "w0rldDBp@ss");
+                //con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "w0rldDBp@ss");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                        + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "w0rldDBp@ss");
                 System.out.println("Successfully connected");
                 // Wait a bit
-                Thread.sleep(10000);
+                //Thread.sleep(10000);
                 // Exit for loop
                 break;
             } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
+
+                // Let's wait before attempting to reconnect
+                shouldWait = true;
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
@@ -231,35 +247,37 @@ public class App {
     //Method to display the top N populated countries in the world
     public ArrayList<Country> getTopNCountriesInWorldByPop(Integer number) {
         ArrayList<Country> countryList = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
-                            + "FROM country "
-                            + "JOIN city ON country.capital = city.ID "
-                            + "ORDER BY population DESC"
-                            + " LIMIT " + number + " ";
+            try {
+                if (number == null || number < 1) throw new Exception("Invalid Number input for Query");
 
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Process the result set and add to the list
-            while (rset.next()) {
-                Country country = new Country();
-                country.country_code = rset.getString("country.code");
-                country.country_name = rset.getString("country.name");
-                country.continent = rset.getString("country.continent");
-                country.region = rset.getString("country.region");
-                country.population = rset.getInt("country.population");
-                country.country_capital = rset.getString("capital_city");
-                countryList.add(country);
+                // Create an SQL statement
+                Statement stmt = con.createStatement();
+                // Create string for SQL statement
+                String strSelect =
+                        "SELECT  country.continent, country.capital, city.ID, city.name AS capital_city, country.code, country.name, country.region, country.population "
+                                + "FROM country "
+                                + "JOIN city ON country.capital = city.ID "
+                                + "ORDER BY population DESC"
+                                + " LIMIT " + number + " ";
+
+                // Execute SQL statement
+                ResultSet rset = stmt.executeQuery(strSelect);
+                // Process the result set and add to the list
+                while (rset.next()) {
+                    Country country = new Country();
+                    country.country_code = rset.getString("country.code");
+                    country.country_name = rset.getString("country.name");
+                    country.continent = rset.getString("country.continent");
+                    country.region = rset.getString("country.region");
+                    country.population = rset.getInt("country.population");
+                    country.country_capital = rset.getString("capital_city");
+                    countryList.add(country);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get country details");
+                return null;
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
 
         // Print a blank line before the heading
         System.out.print("\n");

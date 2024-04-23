@@ -4,12 +4,10 @@ services:
   app:
     build: .
 
-  # Application Test Dockerfile is in /src/test folder
-  #apptest:
-  #  build: src/test/.
-
   # db is in world folder
   db:
     build: db/world/.
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    ports:
+      - "33060:3306"
