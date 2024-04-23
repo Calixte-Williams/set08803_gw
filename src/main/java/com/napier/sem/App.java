@@ -11,7 +11,7 @@ public class App {
         // Connect to database
         //a.connect();
         if (args.length < 1) {
-            a.connect("localhost:33060", 10000);
+            a.connect("localhost:33060", 30000);
         } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
@@ -139,7 +139,7 @@ public class App {
         }
 
         // Connection to the database
-        int retries = 10;
+        int retries = 100;
         boolean shouldWait = false;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
