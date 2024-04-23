@@ -248,7 +248,8 @@ public class App {
     public ArrayList<Country> getTopNCountriesInWorldByPop(Integer number) {
         ArrayList<Country> countryList = new ArrayList<>();
             try {
-                if (number == null || number < 1) throw new Exception("Invalid Number input for Query");
+                if (number == null || number < 1) throw new Exception ("Fail! Invalid Number input for Query");
+
 
                 // Create an SQL statement
                 Statement stmt = con.createStatement();

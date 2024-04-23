@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.TestInstance;
 
 import java.sql.*;
@@ -22,9 +23,24 @@ public class AppTest {
     }
 
     @Test
-    void getTopNCountriesByPopulationTest() {
+    void testGetCountriesByPopulation() {
+        ArrayList<Country> expectedCountries = new ArrayList<>();
 
-        app.getTopNCountriesInWorldByPop(null);
+        // Act
+        ArrayList<Country> actualCountries = app.getCountriesByPopulation();
+
+        // Assert
+        //Expects the total number of Countries from the World DB (232) and fails if incorrect.
+        assertEquals(232, actualCountries.size());
+
+    }
+
+    @Test
+    void testGetTopNCountriesInWorldByPopThrowsException() {
+
+        assertThrows(Exception.class, () -> {
+            app.getTopNCountriesInWorldByPop(0);
+        });
     }
 
 }
