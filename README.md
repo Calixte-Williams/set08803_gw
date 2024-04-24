@@ -5,8 +5,7 @@
 * License [![LICENSE](https://img.shields.io/github/license/Calixte-Williams/set08803_gw.svg?style=flat-square)](https://github.com/Calixte-Williams/set08803_gw/blob/master/LICENSE)
 * Release [![Releases](https://img.shields.io/github/release/Calixte-Williams/set08803_gw/all.svg?style=flat-square)](https://github.com/Calixte-Williams/set08803_gw/releases)
 * Code Coverage [![codecov](https://codecov.io/gh/Calixte-Williams/set08803_gw/graph/badge.svg?token=VYZ5G3UOCX)](https://codecov.io/gh/Calixte-Williams/set08803_gw)
-* Code Coverage Graph
-  https://codecov.io/gh/Calixte-Williams/set08803_gw/graphs/sunburst.svg?token=VYZ5G3UOCX
+
 
 ## Group Members
 - Calixte Williams
