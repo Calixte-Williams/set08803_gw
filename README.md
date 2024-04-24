@@ -4,6 +4,7 @@
 * Develop Branch Status ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Calixte-Williams/set08803_gw/main.yml?branch=develop)
 * License [![LICENSE](https://img.shields.io/github/license/Calixte-Williams/set08803_gw.svg?style=flat-square)](https://github.com/Calixte-Williams/set08803_gw/blob/master/LICENSE)
 * Release [![Releases](https://img.shields.io/github/release/Calixte-Williams/set08803_gw/all.svg?style=flat-square)](https://github.com/Calixte-Williams/set08803_gw/releases)
+* Code Coverage [![codecov](https://codecov.io/gh/Calixte-Williams/set08803_gw/branch/master/graph/badge.svg?token=VYZ5G3UOCX)](https://codecov.io/gh/Calixte-Williams/set08803_gw)
 
 ## Group Members
 - Calixte Williams
